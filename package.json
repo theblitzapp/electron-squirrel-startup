@@ -1,5 +1,5 @@
 {
-  "name": "blitz-electron-squirrel-startup",
+  "name": "electron-squirrel-startup",
   "version": "1.0.0",
   "description": "Default Squirrel.Windows event handler for your Electron apps.",
   "main": "index.js",
