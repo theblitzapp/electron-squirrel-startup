@@ -1,8 +1,10 @@
-var assert = require('assert');
-var startup = require('../');
+/* eslint-disable func-names */
+/* eslint-disable no-undef */
+const assert = require('assert');
+const startup = require('../');
 
-describe('electron-squirrel-startup', function() {
-  it('should return false by default', function() {
-    assert.equal(startup, false);
+describe('electron-squirrel-startup', () => {
+  it('should return false by default', () => {
+    assert.equal(startup(), false);
   });
 });

@@ -1,3 +1,8 @@
 {
-  "extends": "mongodb-js/node"
+  "extends": "airbnb-base",
+  "rules": {
+    "comma-dangle": "off",
+    "import/no-unresolved": "off",
+    "prefer-template": "off"
+  }
 }

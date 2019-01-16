@@ -1,24 +1,43 @@
-var path = require('path');
-var spawn = require('child_process').spawn;
-var debug = require('debug')('electron-squirrel-startup');
-var app = require('electron').app;
+const { spawn } = require('child_process');
+const debug = require('debug')('electron-squirrel-startup');
+const { app } = require('electron');
+const { existsSync } = require('fs');
+const { homedir } = require('os');
+const path = require('path');
 
-var run = function(args, done) {
-  var updateExe = path.resolve(path.dirname(process.execPath), '..', 'Update.exe');
+const shortcutExists = () => {
+  const name = 'Blitz';
+  return existsSync(path.join(homedir(), 'desktop', `${name}.lnk`));
+};
+
+const run = (args, done) => {
+  const updateExe = path.resolve(
+    path.dirname(process.execPath),
+    '..',
+    'Update.exe'
+  );
   debug('Spawning `%s` with args `%s`', updateExe, args);
   spawn(updateExe, args, {
     detached: true
   }).on('close', done);
 };
 
-var check = function() {
+const check = () => {
   if (process.platform === 'win32') {
-    var cmd = process.argv[1];
+    const cmd = process.argv[1];
     debug('processing squirrel command `%s`', cmd);
-    var target = path.basename(process.execPath);
+    const target = path.basename(process.execPath);
 
-    if (cmd === '--squirrel-install' || cmd === '--squirrel-updated') {
+    if (cmd === '--squirrel-install') {
       run(['--createShortcut=' + target + ''], app.quit);
+      return true;
+    }
+    if (cmd === '--squirrel-updated') {
+      if (shortcutExists()) {
+        run(['--createShortcut=' + target + ''], app.quit);
+      } else {
+        app.quit();
+      }
       return true;
     }
     if (cmd === '--squirrel-uninstall') {
@@ -33,4 +52,4 @@ var check = function() {
   return false;
 };
 
-module.exports = check();
+module.exports = check;
