@@ -5,6 +5,6 @@ const startup = require('../');
 
 describe('electron-squirrel-startup', () => {
   it('should return false by default', () => {
-    assert.equal(startup(), false);
+    assert.equal(startup(), { quit: false });
   });
 });

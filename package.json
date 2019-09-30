@@ -1,6 +1,6 @@
 {
   "name": "electron-squirrel-startup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Default Squirrel.Windows event handler for your Electron apps.",
   "main": "index.js",
   "scripts": {

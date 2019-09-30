@@ -30,7 +30,7 @@ const check = () => {
 
     if (cmd === '--squirrel-install') {
       run(['--createShortcut=' + target + ''], app.quit);
-      return true;
+      return { quit: true, event: 'install' };
     }
     if (cmd === '--squirrel-updated') {
       if (shortcutExists()) {
@@ -38,18 +38,18 @@ const check = () => {
       } else {
         app.quit();
       }
-      return true;
+      return { quit: true, event: 'updated' };
     }
     if (cmd === '--squirrel-uninstall') {
       run(['--removeShortcut=' + target + ''], app.quit);
-      return true;
+      return { quit: true, event: 'uninstall' };
     }
     if (cmd === '--squirrel-obsolete') {
       app.quit();
-      return true;
+      return { quit: true, event: 'obsolete' };
     }
   }
-  return false;
+  return { quit: false, event: 'none' };
 };
 
 module.exports = check;
