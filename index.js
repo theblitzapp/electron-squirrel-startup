@@ -41,7 +41,7 @@ const check = () => {
       return { quit: true, event: 'updated' };
     }
     if (cmd === '--squirrel-uninstall') {
-      run(['--removeShortcut=' + target + ''], app.quit);
+      run(['--removeShortcut=' + target + ''], () => {});
       return { quit: true, event: 'uninstall' };
     }
     if (cmd === '--squirrel-obsolete') {
