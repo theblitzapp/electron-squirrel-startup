@@ -34,9 +34,7 @@ const check = () => {
     }
     if (cmd === '--squirrel-updated') {
       if (shortcutExists()) {
-        run(['--createShortcut=' + target + ''], app.quit);
-      } else {
-        app.quit();
+        run(['--createShortcut=' + target + ''], () => {});
       }
       return { quit: true, event: 'updated' };
     }
